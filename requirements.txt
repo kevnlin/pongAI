@@ -1,0 +1,15 @@
+# On a CUDA server install the matching torch build first, e.g.
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu124
+torch
+torchvision
+ultralytics>=8.3
+opencv-python
+numpy
+scikit-learn
+joblib
+imageio-ffmpeg
+fastapi
+uvicorn[standard]
+python-multipart
+openai
+mediapipe

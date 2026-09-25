@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PongAI Coach</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <span class="pill pill-green">PongAI</span>
+    <span class="status" id="status"></span>
+  </header>
+
+  <main>
+    <!-- 1. upload -->
+    <section id="upload" class="card">
+      <label id="drop" class="drop" tabindex="0">
+        <input id="file" type="file" accept="video/*" hidden>
+        <div class="drop-title">Drop a match video here</div>
+        <div class="drop-sub">or click to choose a file &middot; mp4 / mov</div>
+        <div class="drop-hint">Film from the side with as much of the table in view as possible.
+          The <b>right-side</b> player is analysed.</div>
+      </label>
+
+      <div id="setup" hidden>
+        <div class="setup-head">
+          <div>
+            <div class="label">table corners (optional)</div>
+            <p class="muted" id="corner-help">Click the 4 corners of the table top for more accurate speed and
+              placement, or skip to auto-detect.</p>
+          </div>
+          <div class="setup-actions">
+            <button id="reset" class="btn ghost" type="button">Reset corners</button>
+            <button id="change" class="btn ghost" type="button">Change video</button>
+          </div>
+        </div>
+        <div class="canvas-wrap"><canvas id="preview"></canvas></div>
+        <div class="setup-foot">
+          <label class="check"><input type="checkbox" id="use-llm"> AI coach feedback <span class="muted" id="llm-note"></span></label>
+          <button id="go" class="btn primary" type="button">Analyse video</button>
+        </div>
+      </div>
+
+      <div id="progress" hidden>
+        <div class="label" id="stage">uploading</div>
+        <div class="bar"><div class="bar-fill" id="bar"></div></div>
+        <div class="muted" id="progress-note"></div>
+      </div>
+      <div id="error" class="error" hidden></div>
+    </section>
+
+    <!-- 2. results -->
+    <section id="results" hidden>
+      <div class="video-card">
+        <video id="overlay" controls playsinline muted></video>
+        <span class="pill pill-green corner-tl">PongAI</span>
+        <span class="pill pill-cream corner-tr">MATCH ANALYSIS</span>
+      </div>
+
+      <div class="grid g3">
+        <div class="tile">
+          <div class="label">strokes</div>
+          <div class="big" id="t-strokes">–</div>
+          <div class="small" id="t-strokes-sub"></div>
+        </div>
+        <div class="tile">
+          <div class="label">forehand / backhand</div>
+          <div class="big" id="t-fhbh">–</div>
+          <div class="small" id="t-fhbh-sub"></div>
+        </div>
+        <div class="tile">
+          <div class="label">est. shot speed</div>
+          <div class="big"><span id="t-speed">–</span><span class="unit">km/h</span></div>
+          <div class="small" id="t-speed-sub"></div>
+        </div>
+      </div>
+
+      <div class="grid g2">
+        <div class="tile">
+          <div class="tile-head">
+            <div class="label">rally history</div>
+            <div class="legend" id="rally-legend"></div>
+          </div>
+          <div id="rally-chart" class="chart"></div>
+          <div class="small muted">strokes per rally &middot; click a bar to jump to it</div>
+        </div>
+        <div class="tile">
+          <div class="tile-head">
+            <div class="label">shot placement</div>
+            <div class="small muted" id="place-note"></div>
+          </div>
+          <div id="placement" class="chart"></div>
+        </div>
+      </div>
+
+      <div class="grid g2">
+        <div class="tile">
+          <div class="label">stroke types</div>
+          <div id="tech-chart" class="hbars"></div>
+        </div>
+        <div class="tile">
+          <div class="label">posture at contact</div>
+          <div class="sub-label">weight / lean</div>
+          <div id="lean-chart" class="hbars"></div>
+          <div class="sub-label">feet</div>
+          <div id="feet-chart" class="hbars"></div>
+        </div>
+      </div>
+
+      <div class="tile coach">
+        <div class="tile-head">
+          <div class="label">coach</div>
+          <div class="small muted" id="coach-model"></div>
+        </div>
+        <div id="tips" class="tips"></div>
+        <div id="llm" class="llm" hidden></div>
+      </div>
+
+      <div class="tile">
+        <div class="tile-head">
+          <div class="label">shot log</div>
+          <button id="again" class="btn ghost" type="button">Analyse another video</button>
+        </div>
+        <div class="table-wrap">
+          <table id="shots">
+            <thead><tr><th>#</th><th>time</th><th>hand</th><th>technique</th><th>lean</th><th>feet</th><th class="num">km/h</th><th>rally</th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <footer class="foot">experimental measurements &middot; speeds are estimates &middot; <span id="models"></span></footer>
+    </section>
+  </main>
+
+  <div id="tooltip" class="tooltip" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>

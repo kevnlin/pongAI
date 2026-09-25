@@ -1,0 +1,30 @@
+# environments
+/.venv/
+__pycache__/
+*.pyc
+
+# secrets (API keys live in .env; .env.example is the committed template)
+.env
+.env.*
+!.env.example
+/env/
+
+# data (re-download with: python -m scripts.download_data)
+# leading "/" anchors to the repo root so pongai/data/ (source code) is NOT ignored
+/data/
+/external/
+/datasets/
+
+# generated
+/cache/
+/runs/
+/uploads/
+/out/
+# ultralytics downloads base weights (yolo11n-pose.pt, ...) into the repo root
+*.pt
+
+# trained models: to use them on your laptop, copy them back with scp
+# (or delete this line and commit them; they are ~20 MB)
+/weights/
+
+# results/ (eval history) IS committed so improvements are tracked across machines
