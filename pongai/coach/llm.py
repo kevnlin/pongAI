@@ -98,16 +98,21 @@ def coach_feedback(report: dict, tips: list[dict], keyframes: list[tuple[str, np
     return resp.choices[0].message.content
 
 
+def stroke_prompt(vocab: dict[str, list[str]], side: str) -> str:
+    """Prompt for classify_stroke; also used to build the LoRA fine-tuning set (training/build_vlm_dataset.py)."""
+    spec = "\n".join(f"- {k}: one of {v}" for k, v in vocab.items())
+    return (f"These frames (left to right, ~33 ms apart, last-but-one is ball contact) show the {side}-side "
+            f"table tennis player hitting the ball, with their skeleton drawn. Classify the stroke.\n{spec}\n"
+            "Lean = where the player's weight is at contact; feet = which feet are off the ground at contact. "
+            'Answer with JSON only, e.g. {"hand": "...", "technique": "...", "lean": "...", "feet": "..."}')
+
+
 def classify_stroke(strip: np.ndarray, vocab: dict[str, list[str]], side: str) -> dict:
     """Zero-shot stroke labelling of a frame strip (used by scripts/eval_vlm.py)."""
     client = _client()
     if client is None:
         raise RuntimeError("no LLM configured: set OPENAI_API_KEY or PONGAI_LLM_BASE_URL")
-    spec = "\n".join(f"- {k}: one of {v}" for k, v in vocab.items())
-    text = (f"These frames (left to right, ~33 ms apart, last-but-one is ball contact) show the {side}-side "
-            f"table tennis player hitting the ball, with their skeleton drawn. Classify the stroke.\n{spec}\n"
-            "Lean = where the player's weight is at contact; feet = which feet are off the ground at contact. "
-            'Answer with JSON only, e.g. {"hand": "...", "technique": "...", "lean": "...", "feet": "..."}')
+    text = stroke_prompt(vocab, side)
     resp = client.chat.completions.create(
         model=model_name(), max_tokens=100, temperature=0,
         response_format={"type": "json_object"},
