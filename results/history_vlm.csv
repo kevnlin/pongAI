@@ -1,0 +1,2 @@
+time,tag,model,videos,n,hand_acc,technique_acc,lean_acc,feet_acc,hand_macro_f1,technique_macro_f1,lean_macro_f1,feet_macro_f1
+2026-09-28 17:57:53,qwen3-vl-8b,Qwen/Qwen3-VL-8B-Instruct,test,60,0.55,0.1167,0.0333,0.6333,0.5489,0.0795,0.019,0.1567

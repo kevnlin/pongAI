@@ -1,0 +1,370 @@
+{
+  "tag": "baseline-coco",
+  "time": "2026-09-28 19:17:37",
+  "args": {
+    "videos": "test",
+    "ball": "coco",
+    "pose": null,
+    "pose_stride": 1,
+    "stroke_model": null,
+    "side": "right",
+    "limit_frames": 0,
+    "device": null,
+    "refresh": false,
+    "tag": "baseline-coco"
+  },
+  "components": {
+    "ball": "coco:yolo11m",
+    "pose": "pose:yolo11m-pose.pt",
+    "stroke": "heuristic"
+  },
+  "summary": {
+    "ball": {
+      "recall@5px": 0.5666,
+      "recall@10px": 0.5726,
+      "detection_rate": 0.9326,
+      "median_err_px": 1.59,
+      "fp_rate_on_invisible": 0.9805,
+      "n_visible": 6836
+    },
+    "bounce": {
+      "precision": 0.3022,
+      "recall": 0.5829,
+      "f1": 0.3981,
+      "tp": 123,
+      "fp": 284,
+      "fn": 88
+    },
+    "hit_right": {
+      "precision": 0.2822,
+      "recall": 0.2788,
+      "f1": 0.2805,
+      "tp": 46,
+      "fp": 117,
+      "fn": 119
+    },
+    "hit_left": {
+      "precision": 0.4052,
+      "recall": 0.3924,
+      "f1": 0.3987,
+      "tp": 62,
+      "fp": 91,
+      "fn": 96
+    },
+    "classification": {
+      "e2e_feet": {
+        "n": 46,
+        "accuracy": 0.0435,
+        "macro_f1": 0.0167
+      },
+      "e2e_hand": {
+        "n": 46,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "e2e_lean": {
+        "n": 46,
+        "accuracy": 0.0217,
+        "macro_f1": 0.0071
+      },
+      "e2e_technique": {
+        "n": 46,
+        "accuracy": 0.2391,
+        "macro_f1": 0.1833
+      },
+      "oracle_feet": {
+        "n": 165,
+        "accuracy": 0.0788,
+        "macro_f1": 0.0292
+      },
+      "oracle_hand": {
+        "n": 165,
+        "accuracy": 0.0,
+        "macro_f1": 0.0
+      },
+      "oracle_lean": {
+        "n": 165,
+        "accuracy": 0.0364,
+        "macro_f1": 0.0117
+      },
+      "oracle_technique": {
+        "n": 165,
+        "accuracy": 0.2121,
+        "macro_f1": 0.1408
+      }
+    },
+    "rally": {
+      "n_gt_endings": 58,
+      "coverage": 0.8966,
+      "winner_accuracy": 0.6154
+    }
+  },
+  "per_video": {
+    "test_1": {
+      "ball": {
+        "recall@5px": 0.5301,
+        "recall@10px": 0.5323,
+        "detection_rate": 0.5403,
+        "median_err_px": 1.15,
+        "fp_rate_on_invisible": 0.5,
+        "n_visible": 881
+      },
+      "hit_right": {
+        "precision": 0.4091,
+        "recall": 0.225,
+        "f1": 0.2903,
+        "tp": 9,
+        "fp": 13,
+        "fn": 31
+      },
+      "hit_left": {
+        "precision": 0.1071,
+        "recall": 0.0682,
+        "f1": 0.0833,
+        "tp": 3,
+        "fp": 25,
+        "fn": 41
+      },
+      "bounce": {
+        "precision": 0.3115,
+        "recall": 0.6129,
+        "f1": 0.413,
+        "tp": 19,
+        "fp": 42,
+        "fn": 12
+      },
+      "rally": {
+        "n": 7,
+        "covered": 7,
+        "winner_correct": 5
+      }
+    },
+    "test_2": {
+      "ball": {
+        "recall@5px": 0.621,
+        "recall@10px": 0.6468,
+        "detection_rate": 0.9366,
+        "median_err_px": 1.46,
+        "fp_rate_on_invisible": 1.0,
+        "n_visible": 773
+      },
+      "hit_right": {
+        "precision": 0.2353,
+        "recall": 0.2105,
+        "f1": 0.2222,
+        "tp": 4,
+        "fp": 13,
+        "fn": 15
+      },
+      "hit_left": {
+        "precision": 0.3636,
+        "recall": 0.4,
+        "f1": 0.381,
+        "tp": 4,
+        "fp": 7,
+        "fn": 6
+      },
+      "bounce": null,
+      "rally": {
+        "n": 2,
+        "covered": 2,
+        "winner_correct": 2
+      }
+    },
+    "test_3": {
+      "ball": {
+        "recall@5px": 0.3579,
+        "recall@10px": 0.3605,
+        "detection_rate": 1.0,
+        "median_err_px": 177.63,
+        "fp_rate_on_invisible": 1.0,
+        "n_visible": 799
+      },
+      "hit_right": {
+        "precision": 0.3333,
+        "recall": 0.2,
+        "f1": 0.25,
+        "tp": 2,
+        "fp": 4,
+        "fn": 8
+      },
+      "hit_left": {
+        "precision": 0.6,
+        "recall": 0.2143,
+        "f1": 0.3158,
+        "tp": 3,
+        "fp": 2,
+        "fn": 11
+      },
+      "bounce": {
+        "precision": 0.875,
+        "recall": 0.4516,
+        "f1": 0.5957,
+        "tp": 14,
+        "fp": 2,
+        "fn": 17
+      },
+      "rally": {
+        "n": 5,
+        "covered": 4,
+        "winner_correct": 2
+      }
+    },
+    "test_4": {
+      "ball": {
+        "recall@5px": 0.7655,
+        "recall@10px": 0.7701,
+        "detection_rate": 0.9946,
+        "median_err_px": 1.25,
+        "fp_rate_on_invisible": 1.0,
+        "n_visible": 1305
+      },
+      "hit_right": {
+        "precision": 0.1207,
+        "recall": 0.1842,
+        "f1": 0.1458,
+        "tp": 7,
+        "fp": 51,
+        "fn": 31
+      },
+      "hit_left": {
+        "precision": 0.3556,
+        "recall": 0.4848,
+        "f1": 0.4103,
+        "tp": 16,
+        "fp": 29,
+        "fn": 17
+      },
+      "bounce": {
+        "precision": 0.1963,
+        "recall": 0.7111,
+        "f1": 0.3077,
+        "tp": 32,
+        "fp": 131,
+        "fn": 13
+      },
+      "rally": {
+        "n": 21,
+        "covered": 20,
+        "winner_correct": 11
+      }
+    },
+    "test_5": {
+      "ball": {
+        "recall@5px": 0.7302,
+        "recall@10px": 0.7381,
+        "detection_rate": 1.0,
+        "median_err_px": 1.26,
+        "fp_rate_on_invisible": 1.0,
+        "n_visible": 1008
+      },
+      "hit_right": {
+        "precision": 0.24,
+        "recall": 0.375,
+        "f1": 0.2927,
+        "tp": 6,
+        "fp": 19,
+        "fn": 10
+      },
+      "hit_left": {
+        "precision": 0.4286,
+        "recall": 0.8182,
+        "f1": 0.5625,
+        "tp": 9,
+        "fp": 12,
+        "fn": 2
+      },
+      "bounce": {
+        "precision": 0.5909,
+        "recall": 0.7647,
+        "f1": 0.6667,
+        "tp": 26,
+        "fp": 18,
+        "fn": 8
+      },
+      "rally": {
+        "n": 7,
+        "covered": 7,
+        "winner_correct": 4
+      }
+    },
+    "test_6": {
+      "ball": {
+        "recall@5px": 0.1485,
+        "recall@10px": 0.15,
+        "detection_rate": 1.0,
+        "median_err_px": 279.25,
+        "fp_rate_on_invisible": 1.0,
+        "n_visible": 1300
+      },
+      "hit_right": {
+        "precision": 0.1429,
+        "recall": 0.0556,
+        "f1": 0.08,
+        "tp": 1,
+        "fp": 6,
+        "fn": 17
+      },
+      "hit_left": {
+        "precision": 0.7143,
+        "recall": 0.2381,
+        "f1": 0.3571,
+        "tp": 5,
+        "fp": 2,
+        "fn": 16
+      },
+      "bounce": {
+        "precision": 0.5455,
+        "recall": 0.1463,
+        "f1": 0.2308,
+        "tp": 6,
+        "fp": 5,
+        "fn": 35
+      },
+      "rally": {
+        "n": 8,
+        "covered": 4,
+        "winner_correct": 3
+      }
+    },
+    "test_7": {
+      "ball": {
+        "recall@5px": 0.9247,
+        "recall@10px": 0.926,
+        "detection_rate": 1.0,
+        "median_err_px": 1.05,
+        "fp_rate_on_invisible": 1.0,
+        "n_visible": 770
+      },
+      "hit_right": {
+        "precision": 0.6071,
+        "recall": 0.7083,
+        "f1": 0.6538,
+        "tp": 17,
+        "fp": 11,
+        "fn": 7
+      },
+      "hit_left": {
+        "precision": 0.6111,
+        "recall": 0.88,
+        "f1": 0.7213,
+        "tp": 22,
+        "fp": 14,
+        "fn": 3
+      },
+      "bounce": {
+        "precision": 0.2321,
+        "recall": 0.8966,
+        "f1": 0.3688,
+        "tp": 26,
+        "fp": 86,
+        "fn": 3
+      },
+      "rally": {
+        "n": 8,
+        "covered": 8,
+        "winner_correct": 5
+      }
+    }
+  }
+}
