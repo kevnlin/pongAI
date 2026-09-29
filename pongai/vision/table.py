@@ -85,9 +85,12 @@ def detect_table(frame: np.ndarray) -> Table | None:
     """
     h, w = frame.shape[:2]
     hsv = cv2.cvtColor(cv2.GaussianBlur(frame, (5, 5), 0), cv2.COLOR_BGR2HSV)
+    # brightness floor relative to the frame: a fixed 130 misses the table in dim halls
+    # (mean V ~70, table V ~110 in most OpenTTGames videos) and is unchanged for bright footage
+    v_min = int(np.clip(1.15 * hsv[..., 2].mean(), 60, 130))
     candidates = []
-    for lo, hi in (((100, 120, 130), (130, 255, 255)),   # blue table
-                   ((50, 80, 60), (90, 255, 255))):      # green table
+    for lo, hi in (((100, 120, v_min), (130, 255, 255)),   # blue table
+                   ((50, 80, 60), (90, 255, 255))):        # green table
         mask = cv2.inRange(hsv, np.array(lo), np.array(hi))
         mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, np.ones((9, 9), np.uint8))
         mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, np.ones((7, 7), np.uint8))
@@ -99,6 +102,9 @@ def detect_table(frame: np.ndarray) -> Table | None:
                 continue
             area = cv2.contourArea(c)
             if area < 0.005 * w * h:
+                continue
+            # a side-on table is never in the top third; blue backdrop patches are
+            if y + bh / 2 < h / 3:
                 continue
             candidates.append((area, c))
     if not candidates:

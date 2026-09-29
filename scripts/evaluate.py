@@ -118,6 +118,9 @@ def main():
     ap.add_argument("--device", default=None)
     ap.add_argument("--refresh", action="store_true", help="ignore cached perception")
     ap.add_argument("--tag", default="run")
+    ap.add_argument("--table-margin", type=float, default=None,
+                    help="drop low-confidence ball candidates farther than this many player heights from the table")
+    ap.add_argument("--keep-conf", type=float, default=0.5, help="with --table-margin: always keep candidates this confident")
     ap.add_argument("--racket", default="estimate", choices=["estimate", "oracle"],
                     help="racket hand per player: wrist-motion estimate (as the app does) or the dataset README")
     args = ap.parse_args()
@@ -141,6 +144,9 @@ def main():
         perc = perceive_cached(name, item.video_path, ball_det, pose_est, 0,
                                args.limit_frames or None, args.pose_stride, refresh=args.refresh,
                                progress=_throttled(f"  {name} perception"))
+        if args.table_margin is not None:
+            n = perc.restrict_to_table(args.table_margin, args.keep_conf)
+            print(f"  {name}: removed {n} off-table ball candidates")
         r = evaluate_video(name, perc, clf, args.side, tol_hit=int(round(6 * perc.fps / 120)) or 1,
                            tol_bounce=int(round(4 * perc.fps / 120)) or 1,
                            racket=racket_truth(name) if args.racket == "oracle" else None)

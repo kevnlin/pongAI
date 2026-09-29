@@ -45,6 +45,30 @@ class Perception:
         cl = [[Candidate(*c) for c in row if not np.isnan(c[0])] for row in self.cands]
         self.ball = track_ball(cl, self.width, self.fps)
 
+    def restrict_to_table(self, margin_players: float = 1.0, keep_conf: float = 0.5) -> int:
+        """Drop ball candidates that are far from the table and not confident, then re-track.
+
+        The region is the table polygon grown by `margin_players` x the players' median height in
+        pixels (bounces near the edge and follow-through both reach past the table); candidates
+        outside it survive only with conf >= keep_conf, so a real high lob is kept. Returns the
+        number of candidates removed. No-op without a detected table."""
+        if self.table is None:
+            return 0
+        heights = np.concatenate([b[:, 3] - b[:, 1] for b in self.boxes.values()])
+        heights = heights[np.isfinite(heights)]
+        margin = margin_players * (float(np.median(heights)) if len(heights) else 0.4 * self.height)
+        poly = self.table.corners.reshape(-1, 1, 2)
+        removed = 0
+        for row in self.cands:
+            for c in row:
+                if np.isnan(c[0]) or c[2] >= keep_conf:
+                    continue
+                if cv2.pointPolygonTest(poly, (float(c[0]), float(c[1])), True) < -margin:
+                    c[:] = np.nan
+                    removed += 1
+        self.retrack()
+        return removed
+
     def save(self, path: Path):
         path.parent.mkdir(parents=True, exist_ok=True)
         np.savez_compressed(
@@ -168,8 +192,14 @@ def perceive(video_path: str | Path, ball_det, pose_est, start: int = 0, end: in
     return Perception(start, fps, w, h, cands, poses, boxes, table)
 
 
+# bump when perception output changes for the same models; 2 = table detection works in dim halls
+PERCEPTION_VERSION = 2
+
+
 def cache_path(video_name: str, ball_det, pose_est, start: int, end: int | None, pose_stride: int) -> Path:
     key = f"{getattr(ball_det, 'name', '?')}|{getattr(pose_est, 'name', 'none')}|{start}|{end}|{pose_stride}"
+    if PERCEPTION_VERSION > 1:
+        key += f"|v{PERCEPTION_VERSION}"
     return CACHE_DIR / video_name / f"{hashlib.md5(key.encode()).hexdigest()[:12]}.npz"
 
 

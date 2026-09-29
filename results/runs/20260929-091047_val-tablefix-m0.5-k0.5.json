@@ -1,0 +1,153 @@
+{
+  "tag": "val-tablefix-m0.5-k0.5",
+  "time": "2026-09-29 09:10:47",
+  "args": {
+    "videos": "game_5",
+    "ball": "auto",
+    "pose": null,
+    "pose_stride": 1,
+    "stroke_model": null,
+    "side": "right",
+    "limit_frames": 0,
+    "device": null,
+    "refresh": false,
+    "tag": "val-tablefix-m0.5-k0.5",
+    "table_margin": 0.5,
+    "keep_conf": 0.5,
+    "racket": "estimate"
+  },
+  "components": {
+    "ball": "yolo:ball:stack3",
+    "pose": "pose:yolo11m-pose.pt",
+    "stroke": {
+      "feature_version": 1,
+      "n_features": 263,
+      "n_train": 1134,
+      "ball": "yolo:ball:stack3",
+      "pose": "pose:yolo11m-pose.pt",
+      "oracle_ball": false
+    }
+  },
+  "summary": {
+    "ball": {
+      "recall@5px": 0.9945,
+      "recall@10px": 0.9945,
+      "detection_rate": 0.9999,
+      "median_err_px": 0.64,
+      "fp_rate_on_invisible": 0.9913,
+      "n_visible": 7061
+    },
+    "bounce": {
+      "precision": 0.5666,
+      "recall": 0.9512,
+      "f1": 0.7102,
+      "tp": 234,
+      "fp": 179,
+      "fn": 12
+    },
+    "hit_right": {
+      "precision": 0.8603,
+      "recall": 0.9435,
+      "f1": 0.9,
+      "tp": 117,
+      "fp": 19,
+      "fn": 7
+    },
+    "hit_left": {
+      "precision": 0.8963,
+      "recall": 0.9758,
+      "f1": 0.9344,
+      "tp": 121,
+      "fp": 14,
+      "fn": 3
+    },
+    "classification": {
+      "e2e_feet": {
+        "n": 117,
+        "accuracy": 0.9658,
+        "macro_f1": 0.9007
+      },
+      "e2e_hand": {
+        "n": 117,
+        "accuracy": 0.9915,
+        "macro_f1": 0.9908
+      },
+      "e2e_lean": {
+        "n": 117,
+        "accuracy": 0.9915,
+        "macro_f1": 0.9893
+      },
+      "e2e_technique": {
+        "n": 117,
+        "accuracy": 0.9915,
+        "macro_f1": 0.993
+      },
+      "oracle_feet": {
+        "n": 124,
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "oracle_hand": {
+        "n": 124,
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "oracle_lean": {
+        "n": 124,
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "oracle_technique": {
+        "n": 124,
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      }
+    },
+    "rally": {
+      "n_gt_endings": 50,
+      "coverage": 1.0,
+      "winner_accuracy": 0.82
+    }
+  },
+  "per_video": {
+    "game_5": {
+      "ball": {
+        "recall@5px": 0.9945,
+        "recall@10px": 0.9945,
+        "detection_rate": 0.9999,
+        "median_err_px": 0.64,
+        "fp_rate_on_invisible": 0.9913,
+        "n_visible": 7061
+      },
+      "hit_right": {
+        "precision": 0.8603,
+        "recall": 0.9435,
+        "f1": 0.9,
+        "tp": 117,
+        "fp": 19,
+        "fn": 7
+      },
+      "hit_left": {
+        "precision": 0.8963,
+        "recall": 0.9758,
+        "f1": 0.9344,
+        "tp": 121,
+        "fp": 14,
+        "fn": 3
+      },
+      "bounce": {
+        "precision": 0.5666,
+        "recall": 0.9512,
+        "f1": 0.7102,
+        "tp": 234,
+        "fp": 179,
+        "fn": 12
+      },
+      "rally": {
+        "n": 50,
+        "covered": 50,
+        "winner_correct": 41
+      }
+    }
+  }
+}
