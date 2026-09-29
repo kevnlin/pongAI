@@ -6,7 +6,7 @@
 Only the language model gets LoRA adapters; the vision encoder stays frozen. The loss covers the
 JSON answer tokens only. After every epoch the adapter is scored on the val split (game_5) by greedy
 generation with the same per-target accuracy as scripts/eval_vlm.py; the best epoch is kept as
-<out>/best. Serve it with vLLM (--enable-lora, or --merge first) and run scripts/eval_vlm.py.
+<out>/best. A valmirror split (build_vlm_dataset.py --mirror) is scored too, for left-handers only. Serve it with vLLM (--enable-lora, or --merge first) and run scripts/eval_vlm.py.
 Needs torch, transformers>=4.57, peft (not in requirements.txt; use a separate venv).
 """
 from __future__ import annotations
@@ -106,8 +106,8 @@ def main():
 
     torch.manual_seed(args.seed)
     data, out, device = Path(args.data), Path(args.out), torch.device("cuda")
-    train, val = load_rows(data, "train"), load_rows(data, "val")
-    print(f"{len(train)} train / {len(val)} val examples", flush=True)
+    train, val, valm = load_rows(data, "train"), load_rows(data, "val"), load_rows(data, "valmirror")
+    print(f"{len(train)} train / {len(val)} val / {len(valm)} valmirror examples", flush=True)
 
     processor = AutoProcessor.from_pretrained(args.model)
     model = Qwen3VLForConditionalGeneration.from_pretrained(args.model, dtype=torch.bfloat16,
@@ -140,6 +140,8 @@ def main():
         scores = validate(model, processor, val, data, device)
         mean = sum(scores[f"{t}_acc"] for t in TARGETS) / len(TARGETS)
         history.append({"epoch": epoch, **scores, "mean_acc": round(mean, 4)})
+        if valm:  # left-handed check only; the best epoch is still chosen on the real val strokes
+            history[-1]["valmirror"] = validate(model, processor, valm, data, device)
         print(f"epoch {epoch} val: {json.dumps(history[-1])}", flush=True)
         if mean > best:
             best = mean

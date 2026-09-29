@@ -32,7 +32,9 @@ VOCAB = {"hand": list(HANDS), "technique": list(TECHNIQUES), "lean": list(LEANS)
 OFFSETS = (-12, -6, 0, 4)  # frames at 120 fps
 
 
-def stroke_strip(video_path, frame: int, side: str, pose: PoseEstimator, height: int = 420) -> np.ndarray | None:
+def stroke_strip(video_path, frame: int, side: str, pose: PoseEstimator, height: int = 420,
+                 mirror: bool = False) -> np.ndarray | None:
+    """mirror=True flips each crop left-right (frame order kept); used for training augmentation."""
     cap = cv2.VideoCapture(str(video_path))
     fps = cap.get(cv2.CAP_PROP_FPS) or 120
     offs = [int(round(o * fps / 120)) for o in OFFSETS]
@@ -62,6 +64,8 @@ def stroke_strip(video_path, frame: int, side: str, pose: PoseEstimator, height:
         x1, x2 = int(max(0, x1 - 0.5 * w)), int(min(img.shape[1], x2 + 0.5 * w))
         y1, y2 = int(max(0, y1 - 0.15 * h)), int(min(img.shape[0], y2 + 0.1 * h))
         c = img[y1:y2, x1:x2]
+        if mirror:
+            c = cv2.flip(c, 1)
         crops.append(cv2.resize(c, (int(c.shape[1] * height / c.shape[0]), height)))
     return np.hstack(crops)
 

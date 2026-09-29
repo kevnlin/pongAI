@@ -2,3 +2,4 @@ time,tag,model,videos,n,hand_acc,technique_acc,lean_acc,feet_acc,hand_macro_f1,t
 2026-09-28 17:57:53,qwen3-vl-8b,Qwen/Qwen3-VL-8B-Instruct,test,60,0.55,0.1167,0.0333,0.6333,0.5489,0.0795,0.019,0.1567
 2026-09-28 21:12:52,qwen3-vl-8b-zeroshot-all,Qwen/Qwen3-VL-8B-Instruct,test,164,0.439,0.0854,0.0549,0.5854,0.436,0.074,0.0311,0.1488
 2026-09-28 22:44:01,qwen3-vl-8b-lora-all,pongai-strokes,test,164,0.7317,0.689,0.7988,0.5854,0.7307,0.4318,0.3057,0.3302
+2026-09-29 01:09:56,qwen3-vl-8b-lora-mirror-all,pongai-strokes-mirror,test,164,0.7439,0.7378,0.7805,0.5366,0.7414,0.5102,0.354,0.2558
