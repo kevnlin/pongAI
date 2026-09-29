@@ -39,7 +39,17 @@
         </div>
         <div class="canvas-wrap"><canvas id="preview"></canvas></div>
         <div class="setup-foot">
-          <label class="check"><input type="checkbox" id="use-llm"> AI coach feedback <span class="muted" id="llm-note"></span></label>
+          <div class="setup-options">
+            <label class="check">Racket hand
+              <select id="racket">
+                <option value="auto">auto-detect</option>
+                <option value="right">right</option>
+                <option value="left">left</option>
+              </select>
+              <span class="muted">setting it makes forehand/backhand more reliable</span>
+            </label>
+            <label class="check"><input type="checkbox" id="use-llm"> AI coach feedback <span class="muted" id="llm-note"></span></label>
+          </div>
           <button id="go" class="btn primary" type="button">Analyse video</button>
         </div>
       </div>

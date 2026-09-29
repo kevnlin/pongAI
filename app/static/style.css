@@ -71,7 +71,10 @@ button, input { font: inherit; }
 .setup-foot { align-items: center; margin-top: 14px; }
 .canvas-wrap { position: relative; }
 #preview { width: 100%; display: block; cursor: crosshair; background: #000; }
-.check { display: flex; gap: 8px; align-items: center; }
+.check { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.setup-options { display: flex; flex-direction: column; gap: 8px; }
+.check select { border: 1px solid var(--ink); background: var(--surface); color: var(--ink); padding: 4px 6px;
+  font: 700 12px var(--mono); }
 
 .btn { border: 1px solid var(--ink); background: transparent; color: var(--ink); padding: 8px 14px; cursor: pointer;
   font: 700 12px var(--mono); }

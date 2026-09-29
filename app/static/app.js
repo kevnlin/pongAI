@@ -97,6 +97,7 @@ $("go").addEventListener("click", () => {
   fd.append("side", "right");
   fd.append("corners", state.corners.length === 4 ? JSON.stringify(state.corners) : "");
   fd.append("use_llm", $("use-llm").checked ? "true" : "false");
+  fd.append("racket", $("racket").value);
 
   $("setup").hidden = true; $("progress").hidden = false; $("error").hidden = true;
   setProgress("uploading", 0, state.file.name);
@@ -151,7 +152,8 @@ async function showResults() {
   renderBars($("feet-chart"), rep.feet_counts);
   renderCoach(rep);
   renderShots(rep);
-  $("models").textContent = `ball: ${rep.models.ball} · pose: ${rep.models.pose} · strokes: ${rep.models.stroke} · ${rep.processing_s}s`;
+  const racket = rep.racket_hand ? ` · racket hand: ${rep.racket_hand} (${rep.racket_source === "player" ? "set by you" : "estimated"})` : "";
+  $("models").textContent = `ball: ${rep.models.ball} · pose: ${rep.models.pose} · strokes: ${rep.models.stroke}${racket} · ${rep.processing_s}s`;
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 

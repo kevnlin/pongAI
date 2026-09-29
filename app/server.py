@@ -32,7 +32,7 @@ lock = threading.Lock()
 executor = ThreadPoolExecutor(max_workers=1)  # one GPU job at a time
 
 
-def _run(job_id: str, video: Path, side: str, corners: list | None, use_llm: bool):
+def _run(job_id: str, video: Path, side: str, corners: list | None, use_llm: bool, racket: str | None):
     def progress(stage: str, p: float):
         with lock:
             jobs[job_id].update(stage=stage, progress=round(float(p), 3))
@@ -40,7 +40,8 @@ def _run(job_id: str, video: Path, side: str, corners: list | None, use_llm: boo
     with lock:
         jobs[job_id]["status"] = "running"
     try:
-        analyze_video(video, video.parent, side=side, corners=corners, use_llm=use_llm, progress=progress)
+        analyze_video(video, video.parent, side=side, corners=corners, use_llm=use_llm, racket=racket,
+                      progress=progress)
         with lock:
             jobs[job_id].update(status="done", stage="done", progress=1.0)
     except Exception as e:
@@ -61,12 +62,14 @@ def status():
 
 @app.post("/api/analyze")
 async def analyze(file: UploadFile = File(...), side: str = Form("right"), corners: str = Form(""),
-                  use_llm: bool = Form(True)):
+                  use_llm: bool = Form(True), racket: str = Form("auto")):
     ext = Path(file.filename or "").suffix.lower()
     if ext not in ALLOWED:
         raise HTTPException(400, f"unsupported file type {ext or '?'}; use one of {sorted(ALLOWED)}")
     if side not in ("left", "right"):
         raise HTTPException(400, "side must be left or right")
+    if racket not in ("auto", "right", "left"):
+        raise HTTPException(400, "racket must be auto, right or left")
     pts = None
     if corners:
         try:
@@ -84,7 +87,7 @@ async def analyze(file: UploadFile = File(...), side: str = Form("right"), corne
     with lock:
         jobs[job_id] = {"id": job_id, "status": "queued", "stage": "queued", "progress": 0.0,
                         "filename": file.filename}
-    executor.submit(_run, job_id, video, side, pts, use_llm)
+    executor.submit(_run, job_id, video, side, pts, use_llm, {"right": "R", "left": "L"}.get(racket))
     return {"id": job_id}
 
 

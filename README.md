@@ -66,8 +66,10 @@ python -m scripts.evaluate --videos test --tag yolo11s-stack3          # picks u
 #    (try --mode rgb too, and compare the two rows in results/history.csv)
 
 # 2. stroke classifiers (validation on game_5 is printed, then refit on all 5 games)
-python -m training.train_strokes --final
-python -m scripts.evaluate --videos test --tag strokes-v1
+#    --known-racket uses each player's true racket hand (dataset README) instead of the wrist-motion
+#    estimate, which mislabels a game_5 player; score with the true hand too (--racket oracle)
+python -m training.train_strokes --final --known-racket
+python -m scripts.evaluate --videos test --racket oracle --tag strokes-v1
 
 # 3. optional: zero-shot VLM on the same labels (≈60 API calls with gpt-4o-mini, a few cents)
 #    put OPENAI_API_KEY=sk-... in .env (git-ignored; setup_server.sh creates it from .env.example)
@@ -110,6 +112,10 @@ Baseline measured locally on `test_2` (CPU, motion ball, no training): ball reca
 Film from the side, at the height of the table, with the camera still (a tripod) and as much of the table in view as
 possible. 60 fps or more helps a lot (the dataset is 120 fps). If the table isn't found automatically, click its
 4 corners in the upload screen.
+
+Set your racket hand in the upload screen (or `--racket left|right` for `python -m pongai.pipeline`). Auto-detection
+guesses it from wrist motion and is wrong for roughly 1 player in 6, and a wrong racket hand swaps forehand and
+backhand: on `test_5` (a left-hander) forehand/backhand is right on 7/14 shots with auto-detect and 14/14 when set.
 
 ## Roadmap
 - A learned hit/bounce detector (a temporal model over the ball path and pose) to replace the heuristics in `events.py`

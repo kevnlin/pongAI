@@ -77,6 +77,7 @@ def image_part(img: np.ndarray, max_side: int = 768) -> dict:
 def _compact(report: dict) -> dict:
     """Drop per-frame detail the model does not need."""
     keep = {k: report[k] for k in ("totals", "speed", "technique_counts", "lean_counts", "feet_counts")}
+    keep["racket_hand"] = report.get("racket_hand")
     keep["rallies"] = [{k: r[k] for k in ("n_strokes", "outcome", "won")} for r in report["rallies"]]
     keep["shots"] = [{k: s.get(k) for k in ("n", "hand", "technique", "lean", "feet", "speed_kmh")}
                      for s in report["shots"][:40]]

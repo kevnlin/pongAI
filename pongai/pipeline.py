@@ -38,8 +38,9 @@ def _models(ball: str, pose: str | None, device: str | None):
 def analyze_video(video_path: str | Path, out_dir: str | Path, side: str = "right",
                   corners: list | None = None, ball: str = "auto", pose: str | None = None,
                   pose_stride: int | None = None, device: str | None = None, use_llm: bool = True,
-                  max_frames: int | None = None,
+                  max_frames: int | None = None, racket: str | None = None,
                   progress: Callable[[str, float], None] = lambda stage, p: None) -> dict:
+    """racket: the analysed player's racket hand, "R" or "L"; None estimates it from wrist motion."""
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
@@ -55,7 +56,9 @@ def analyze_video(video_path: str | Path, out_dir: str | Path, side: str = "righ
                     progress=lambda p: progress("tracking ball & players", p))
     progress("detecting strokes", 0.0)
     ev = detect_events(perc.ball, perc.width, perc.fps, perc.table)
-    ctxs = [c for c in contexts_for_hits(ev.hits, perc.poses, perc.fps) if c.side == side]
+    # a player-given racket hand beats the wrist-motion estimate (wrong for ~1 player in 6)
+    ctxs = [c for c in contexts_for_hits(ev.hits, perc.poses, perc.fps, {side: racket} if racket else None)
+            if c.side == side]
     feats = [stroke_features(perc.poses[side], perc.ball, c, perc.fps, perc.table, perc.width) for c in ctxs]
     if clf.ready and feats:
         preds = clf.predict(np.stack(feats))
@@ -65,6 +68,8 @@ def analyze_video(video_path: str | Path, out_dir: str | Path, side: str = "righ
     models = {"ball": ball_det.name, "pose": pose_est.name,
               "stroke": f"trained (n={clf.meta.get('n_train')})" if clf.ready else "heuristic (untrained)"}
     report = build_report(perc, ev, side, preds, models)
+    report["racket_hand"] = {"R": "right", "L": "left"}.get(ctxs[0].racket_hand if ctxs else racket)
+    report["racket_source"] = "player" if racket else "estimated"
 
     keyframes = render_overlay(video_path, out_dir / "overlay.mp4", perc, report, side,
                                progress=lambda p: progress("rendering overlay", p))
@@ -93,6 +98,8 @@ def main():
     ap.add_argument("--device", default=None)
     ap.add_argument("--max-frames", type=int, default=None)
     ap.add_argument("--no-llm", action="store_true")
+    ap.add_argument("--racket", default="auto", choices=["auto", "right", "left"],
+                    help="the player's racket hand (auto = estimate from wrist motion)")
     args = ap.parse_args()
     last = {"stage": None}
 
@@ -103,7 +110,8 @@ def main():
         print(".", end="", flush=True) if p < 1 else None
 
     r = analyze_video(args.video, args.out, args.side, ball=args.ball, pose=args.pose, device=args.device,
-                      use_llm=not args.no_llm, max_frames=args.max_frames, progress=progress)
+                      use_llm=not args.no_llm, max_frames=args.max_frames,
+                      racket={"right": "R", "left": "L"}.get(args.racket), progress=progress)
     print("\n" + json.dumps({k: r[k] for k in ("totals", "speed", "technique_counts", "tips")}, indent=2))
     print(f"wrote {args.out}/report.json and {args.out}/overlay.mp4")
 
