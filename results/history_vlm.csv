@@ -6,3 +6,8 @@ time,tag,model,videos,n,hand_acc,technique_acc,lean_acc,feet_acc,hand_macro_f1,t
 2026-09-29 04:20:30,qwen3-vl-8b-lora-racket-oracle,pongai-strokes-racket,test,164,0.7073,0.5976,0.7744,0.5732,0.7069,0.422,0.3559,0.2723
 2026-09-29 04:22:59,qwen3-vl-8b-lora-racket-wrist,pongai-strokes-racket,test,164,0.7134,0.5915,0.7683,0.5671,0.7131,0.4205,0.3434,0.2677
 2026-09-29 04:26:08,qwen3-vl-8b-lora-racket-vote,pongai-strokes-racket,test,164,0.7195,0.5793,0.7744,0.5671,0.7191,0.4046,0.346,0.2725
+2026-09-29 06:38:17,qwen3-vl-8b-lora-mirror-mirrorcheck,pongai-strokes-mirror,test,164,0.75,0.7317,0.7805,0.5183,0.7473,0.4992,0.354,0.2492
+2026-09-29 09:36:16,qwen3-vl-8b-lora-masked-mirrorcheck,pongai-strokes-masked,test,164,0.7805,0.6768,0.7744,0.5915,0.7797,0.4487,0.347,0.3189
+2026-09-29 09:42:55,qwen3-vl-8b-lora-mirror-shiftcheck,pongai-strokes-mirror,test,164,0.7317,0.7195,0.7744,0.5183,0.7297,0.501,0.3304,0.2578
+2026-09-29 09:51:21,qwen3-vl-8b-lora-masked-shiftcheck,pongai-strokes-masked,test,164,0.7805,0.6829,0.7683,0.5915,0.7797,0.4515,0.3447,0.3173
+2026-09-29 11:35:16,qwen3-vl-8b-lora-composite-checks,pongai-strokes-composite,test,164,0.6646,0.6159,0.7805,0.6037,0.6643,0.4128,0.2678,0.2669

@@ -1,0 +1,2998 @@
+{
+  "model": "pongai-strokes-masked",
+  "args": {
+    "videos": "test",
+    "side": "right",
+    "max": 1000,
+    "seed": 0,
+    "tag": "qwen3-vl-8b-lora-masked-shiftcheck",
+    "racket": "none",
+    "player_only": true,
+    "mirror_check": false,
+    "shift_check": true
+  },
+  "racket": {},
+  "summary": {
+    "hand": {
+      "n": 164,
+      "accuracy": 0.7805,
+      "macro_f1": 0.7797
+    },
+    "technique": {
+      "n": 164,
+      "accuracy": 0.6829,
+      "macro_f1": 0.4515
+    },
+    "lean": {
+      "n": 164,
+      "accuracy": 0.7683,
+      "macro_f1": 0.3447
+    },
+    "feet": {
+      "n": 164,
+      "accuracy": 0.5915,
+      "macro_f1": 0.3173
+    },
+    "shift_consistency": {
+      "hand": 0.8902,
+      "technique": 0.8293,
+      "lean": 0.939,
+      "feet": 0.8841,
+      "n": 164
+    }
+  },
+  "rows": [
+    {
+      "video": "test_6",
+      "frame": 10467,
+      "gt": "right_backhand_push neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 9271,
+      "gt": "right_backhand_loop unknown unknown",
+      "pred": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "unknown",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 15322,
+      "gt": "right_backhand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 3575,
+      "gt": "right_forehand_serve neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 10765,
+      "gt": "right_forehand_loop right_leaning left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 30685,
+      "gt": "right_forehand_loop neutral unknown",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 11497,
+      "gt": "right_backhand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 15519,
+      "gt": "right_forehand_serve neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 16533,
+      "gt": "right_forehand_serve neutral left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 6763,
+      "gt": "right_forehand_serve neutral right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 18321,
+      "gt": "right_backhand_push neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 2437,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 477,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 31687,
+      "gt": "right_backhand_push neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 1220,
+      "gt": "right_forehand_serve neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 1329,
+      "gt": "right_backhand_loop front_heavy unknown",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 703,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 2744,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 7889,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 11294,
+      "gt": "right_backhand_loop neutral both_feet_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 12724,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 5618,
+      "gt": "right_forehand_loop neutral both_feet_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 6303,
+      "gt": "right_forehand_serve neutral left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 1468,
+      "gt": "right_forehand_loop unknown unknown",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "unknown",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "unknown",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 994,
+      "gt": "right_forehand_serve neutral right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 1041,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 30237,
+      "gt": "right_forehand_push neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 3506,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 7375,
+      "gt": "right_backhand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 2312,
+      "gt": "right_forehand_loop back_heavy unknown",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 19664,
+      "gt": "right_forehand_loop back_heavy both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 328,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 924,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 1791,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 1517,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 13560,
+      "gt": "right_backhand_flick neutral right_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 5014,
+      "gt": "right_backhand_loop right_leaning left_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 813,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_3",
+      "frame": 7563,
+      "gt": "right_forehand_loop neutral right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 10882,
+      "gt": "right_backhand_serve neutral right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 3481,
+      "gt": "right_backhand_serve neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 7687,
+      "gt": "right_backhand_flick right_leaning both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_3",
+      "frame": 3276,
+      "gt": "right_forehand_serve neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 241,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 22239,
+      "gt": "right_backhand_loop right_leaning left_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 2080,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 7157,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 12304,
+      "gt": "right_backhand_push neutral left_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 2144,
+      "gt": "right_forehand_serve neutral right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_3",
+      "frame": 1078,
+      "gt": "right_forehand_push neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 1606,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 16491,
+      "gt": "right_forehand_serve neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 7045,
+      "gt": "right_backhand_serve neutral right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 610,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 7248,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_3",
+      "frame": 7383,
+      "gt": "right_forehand_push neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 595,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 7965,
+      "gt": "right_backhand_flick neutral right_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 21027,
+      "gt": "right_forehand_smash neutral both_feet_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 11350,
+      "gt": "right_backhand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 7053,
+      "gt": "right_forehand_serve neutral left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 3790,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 4916,
+      "gt": "right_backhand_flick left_leaning right_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 2639,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 7707,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 10586,
+      "gt": "right_forehand_serve neutral left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 9647,
+      "gt": "right_forehand_serve neutral right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 2337,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 13451,
+      "gt": "right_backhand_loop back_heavy right_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "chop",
+        "lean": "back_heavy",
+        "feet": "right_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 13375,
+      "gt": "right_forehand_loop right_leaning both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "chop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 4852,
+      "gt": "right_backhand_serve neutral left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 3691,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 14833,
+      "gt": "right_forehand_serve neutral left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 7006,
+      "gt": "right_backhand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_3",
+      "frame": 2301,
+      "gt": "right_backhand_push neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 12611,
+      "gt": "right_forehand_serve neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 518,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 2586,
+      "gt": "right_backhand_flick back_heavy right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "chop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 6917,
+      "gt": "right_forehand_loop back_heavy both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 7587,
+      "gt": "right_backhand_flick front_heavy both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 15428,
+      "gt": "right_backhand_flick neutral both_feet_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 5420,
+      "gt": "right_backhand_flick neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 4515,
+      "gt": "right_forehand_serve neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 33399,
+      "gt": "right_backhand_push front_heavy both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 2188,
+      "gt": "right_forehand_serve neutral left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 7149,
+      "gt": "right_backhand_push right_leaning left_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 34783,
+      "gt": "right_forehand_serve neutral left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 3307,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 13971,
+      "gt": "right_forehand_push neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 5731,
+      "gt": "right_backhand_loop back_heavy both_feet_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 22037,
+      "gt": "right_forehand_serve neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 11187,
+      "gt": "right_backhand_loop back_heavy right_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 7607,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 881,
+      "gt": "right_forehand_push neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 7235,
+      "gt": "right_forehand_loop right_leaning left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 30508,
+      "gt": "right_backhand_flick unknown unknown",
+      "pred": {
+        "hand": "forehand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 5554,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 7883,
+      "gt": "right_backhand_push neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 2709,
+      "gt": "right_backhand_loop neutral both_feet_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 2099,
+      "gt": "right_backhand_chop left_leaning right_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 15457,
+      "gt": "right_backhand_loop back_heavy both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 2232,
+      "gt": "right_forehand_loop neutral left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_3",
+      "frame": 3412,
+      "gt": "right_forehand_loop neutral left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_3",
+      "frame": 4918,
+      "gt": "right_backhand_loop back_heavy both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 134,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 13790,
+      "gt": "right_forehand_loop front_heavy right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 1985,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 3407,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 1960,
+      "gt": "right_backhand_flick neutral left_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 7801,
+      "gt": "right_forehand_serve neutral right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 1148,
+      "gt": "right_backhand_loop neutral right_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 3134,
+      "gt": "right_forehand_loop right_leaning left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 7981,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 7799,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 6987,
+      "gt": "right_forehand_loop back_heavy both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 6714,
+      "gt": "right_forehand_push neutral unknown",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 1699,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 423,
+      "gt": "right_forehand_serve neutral left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 9144,
+      "gt": "right_backhand_block neutral unknown",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 251,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 20857,
+      "gt": "right_forehand_serve neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 11340,
+      "gt": "right_forehand_serve neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 364,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 9047,
+      "gt": "right_backhand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 33546,
+      "gt": "right_backhand_flick front_heavy unknown",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_3",
+      "frame": 4665,
+      "gt": "right_forehand_serve neutral left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "left_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "lob",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 7595,
+      "gt": "right_backhand_loop unknown unknown",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "unknown",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "unknown",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 122,
+      "gt": "right_backhand_serve neutral unknown",
+      "pred": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 31878,
+      "gt": "right_backhand_loop back_heavy left_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 7332,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 417,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 3598,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 13659,
+      "gt": "right_backhand_flick neutral right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 5511,
+      "gt": "right_backhand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 11028,
+      "gt": "right_backhand_push right_leaning left_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 2540,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 9744,
+      "gt": "right_forehand_serve neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 4050,
+      "gt": "right_backhand_flick neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 18460,
+      "gt": "right_backhand_loop neutral right_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "chop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "chop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 2399,
+      "gt": "right_backhand_serve neutral right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 11299,
+      "gt": "right_forehand_loop left_leaning both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 13235,
+      "gt": "right_backhand_push neutral right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 3891,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 7517,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 8919,
+      "gt": "right_forehand_serve neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 15354,
+      "gt": "right_backhand_loop left_leaning both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 8925,
+      "gt": "right_backhand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_3",
+      "frame": 4804,
+      "gt": "right_backhand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 7423,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 7270,
+      "gt": "right_forehand_loop neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 3739,
+      "gt": "right_backhand_loop neutral both_feet_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 12822,
+      "gt": "right_backhand_block right_leaning both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 3296,
+      "gt": "right_forehand_loop neutral right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_2",
+      "frame": 3153,
+      "gt": "right_forehand_serve neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_7",
+      "frame": 6870,
+      "gt": "right_backhand_flick neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "chop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 19527,
+      "gt": "right_backhand_flick neutral both_feet_planted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 11391,
+      "gt": "right_backhand_loop back_heavy left_foot_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "flick",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 7359,
+      "gt": "right_forehand_loop back_heavy both_feet_lifted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "smash",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "smash",
+        "lean": "neutral",
+        "feet": "right_foot_lifted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 33242,
+      "gt": "right_forehand_serve neutral left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_6",
+      "frame": 586,
+      "gt": "right_forehand_loop back_heavy left_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "loop",
+        "lean": "back_heavy",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_3",
+      "frame": 5051,
+      "gt": "right_backhand_loop unknown unknown",
+      "pred": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "unknown",
+        "feet": "unknown"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "loop",
+        "lean": "unknown",
+        "feet": "unknown"
+      }
+    },
+    {
+      "video": "test_1",
+      "frame": 1891,
+      "gt": "right_backhand_block neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_5",
+      "frame": 731,
+      "gt": "right_forehand_serve neutral right_foot_lifted",
+      "pred": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "forehand",
+        "technique": "serve",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    },
+    {
+      "video": "test_4",
+      "frame": 30362,
+      "gt": "right_backhand_flick neutral both_feet_planted",
+      "pred": {
+        "hand": "backhand",
+        "technique": "block",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      },
+      "racket": null,
+      "pred_shift": {
+        "hand": "backhand",
+        "technique": "push",
+        "lean": "neutral",
+        "feet": "both_feet_planted"
+      }
+    }
+  ]
+}
