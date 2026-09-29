@@ -18,6 +18,13 @@ FIT_VIDEOS = [v for v in TRAIN_VIDEOS if v not in VAL_VIDEOS]
 NO_BOUNCE_LABELS = {"test_2"}
 # Videos with left-handed players (README).
 LEFT_HANDED = {"test_3": "one", "test_5": "both", "test_7": "one"}
+# Which players those are; the test_3 / test_7 side was read from the video frames.
+LEFT_HANDED_PLAYERS = {("test_3", "right"), ("test_5", "left"), ("test_5", "right"), ("test_7", "right")}
+
+
+def racket_truth(name: str) -> dict[str, str]:
+    """True racket hand ("R"/"L") of each player; every player not listed in the README is right-handed."""
+    return {s: ("L" if (name, s) in LEFT_HANDED_PLAYERS else "R") for s in ("left", "right")}
 
 
 @dataclass(frozen=True)

@@ -18,7 +18,7 @@ from types import SimpleNamespace
 import numpy as np
 
 from pongai.config import RESULTS_DIR
-from pongai.data.dataset import NO_BOUNCE_LABELS, VideoItem, load_ball, load_events, resolve
+from pongai.data.dataset import NO_BOUNCE_LABELS, VideoItem, load_ball, load_events, racket_truth, resolve
 from pongai.evaluation import ball_counts, classification_report, match_events, prf, summarize_ball
 from pongai.events import detect_events
 from pongai.perception import perceive_cached
@@ -49,7 +49,9 @@ def classify(clf: StrokeClassifier, perc, contexts):
     return [heuristic_prediction(c, f) for c, f in zip(contexts, feats)]
 
 
-def evaluate_video(name, perc, clf, side: str, tol_hit: int, tol_bounce: int) -> dict:
+def evaluate_video(name, perc, clf, side: str, tol_hit: int, tol_bounce: int,
+                   racket: dict[str, str] | None = None) -> dict:
+    """racket: known racket hand per side; None estimates it from wrist motion (as the app does)."""
     n = len(perc)
     start = perc.start
     gt_events = [e for e in load_events(name) if start <= e.frame < start + n]
@@ -72,7 +74,7 @@ def evaluate_video(name, perc, clf, side: str, tol_hit: int, tol_bounce: int) ->
     y = defaultdict(lambda: {"true": [], "pred": []})
     # oracle: classify at GT contact frames (isolates the classifier from hit detection)
     gt_hits = [SimpleNamespace(frame=e.frame - start, side=e.side, serve=False) for e in gt_strokes]
-    ctxs = contexts_for_hits(gt_hits, perc.poses, perc.fps)
+    ctxs = contexts_for_hits(gt_hits, perc.poses, perc.fps, dict(racket) if racket else None)
     idx = [i for i, e in enumerate(gt_strokes) if e.side == side]
     preds = classify(clf, perc, [ctxs[i] for i in idx])
     for i, p in zip(idx, preds):
@@ -80,7 +82,7 @@ def evaluate_video(name, perc, clf, side: str, tol_hit: int, tol_bounce: int) ->
             y[f"oracle_{tgt}"]["true"].append(getattr(gt_strokes[i], tgt))
             y[f"oracle_{tgt}"]["pred"].append(p[tgt])
     # end-to-end: classify detected hits that matched a GT stroke
-    ctxs = contexts_for_hits(ev.hits, perc.poses, perc.fps)
+    ctxs = contexts_for_hits(ev.hits, perc.poses, perc.fps, dict(racket) if racket else None)
     by_frame = {c.frame + start: c for c in ctxs}
     gt_by_frame = {e.frame: e for e in gt_strokes if e.side == side}
     pairs = res.pop("hit_pairs")
@@ -116,6 +118,8 @@ def main():
     ap.add_argument("--device", default=None)
     ap.add_argument("--refresh", action="store_true", help="ignore cached perception")
     ap.add_argument("--tag", default="run")
+    ap.add_argument("--racket", default="estimate", choices=["estimate", "oracle"],
+                    help="racket hand per player: wrist-motion estimate (as the app does) or the dataset README")
     args = ap.parse_args()
 
     ball_det = load_ball_detector(args.ball, device=args.device)
@@ -138,7 +142,8 @@ def main():
                                args.limit_frames or None, args.pose_stride, refresh=args.refresh,
                                progress=_throttled(f"  {name} perception"))
         r = evaluate_video(name, perc, clf, args.side, tol_hit=int(round(6 * perc.fps / 120)) or 1,
-                           tol_bounce=int(round(4 * perc.fps / 120)) or 1)
+                           tol_bounce=int(round(4 * perc.fps / 120)) or 1,
+                           racket=racket_truth(name) if args.racket == "oracle" else None)
         for k, v in r["ball"].items():
             agg["ball"][k] += v
         for k in ("bounce", "hit_left", "hit_right", "rally"):

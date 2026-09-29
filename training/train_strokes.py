@@ -17,7 +17,7 @@ from pathlib import Path
 import numpy as np
 
 from pongai.config import WEIGHTS_DIR
-from pongai.data.dataset import FIT_VIDEOS, TRAIN_VIDEOS, VAL_VIDEOS, VideoItem, gt_trajectory, strokes
+from pongai.data.dataset import FIT_VIDEOS, TRAIN_VIDEOS, VAL_VIDEOS, VideoItem, gt_trajectory, racket_truth, strokes
 from pongai.evaluation import classification_report
 from pongai.perception import perceive_cached, table_for_video
 from pongai.strokes import TARGETS, StrokeClassifier, StrokeContext, stroke_features, wrist_motion
@@ -37,7 +37,7 @@ def segments(frames: list[int], before: int, after: int) -> list[tuple[int, int]
     return [tuple(s) for s in segs]
 
 
-def build(names, ball_det, pose_est, oracle_ball: bool, device=None):
+def build(names, ball_det, pose_est, oracle_ball: bool, device=None, known_racket: bool = False):
     X, Y, meta = [], {t: [] for t in TARGETS}, []
     for name in names:
         item = VideoItem(name)
@@ -62,6 +62,8 @@ def build(names, ball_det, pose_est, oracle_ball: bool, device=None):
                 for k, v in wrist_motion(p.poses[side], fr, p.fps).items():
                     motion[side][k] += v
         racket = {s: ("L" if m["L"] > m["R"] else "R") for s, m in motion.items()}
+        if known_racket:
+            racket = racket_truth(name)
         print(f"  racket hand: {racket}")
 
         prev = None
@@ -94,6 +96,8 @@ def main():
     ap.add_argument("--pose", default=None)
     ap.add_argument("--device", default=None)
     ap.add_argument("--oracle-ball", action="store_true")
+    ap.add_argument("--known-racket", action="store_true",
+                    help="use each player's true racket hand (dataset README) instead of the wrist-motion estimate")
     ap.add_argument("--final", action="store_true", help="refit on all training games before saving")
     ap.add_argument("--out", default=str(WEIGHTS_DIR / "stroke" / "stroke_clf.joblib"))
     args = ap.parse_args()
@@ -101,8 +105,8 @@ def main():
     ball_det = load_ball_detector(args.ball, device=args.device)
     pose_est = PoseEstimator(args.pose, device=args.device)
 
-    Xf, Yf, Mf = build(FIT_VIDEOS, ball_det, pose_est, args.oracle_ball)
-    Xv, Yv, Mv = build(VAL_VIDEOS, ball_det, pose_est, args.oracle_ball)
+    Xf, Yf, Mf = build(FIT_VIDEOS, ball_det, pose_est, args.oracle_ball, known_racket=args.known_racket)
+    Xv, Yv, Mv = build(VAL_VIDEOS, ball_det, pose_est, args.oracle_ball, known_racket=args.known_racket)
     print(f"fit: {len(Xf)} strokes, val: {len(Xv)} strokes, {Xf.shape[1]} features")
     clf = StrokeClassifier().fit(Xf, Yf)
     if len(Xv):
@@ -116,7 +120,8 @@ def main():
         Y = {t: Yf[t] + Yv[t] for t in TARGETS}
         clf = StrokeClassifier().fit(X, Y)
         print(f"refit on all {len(X)} training strokes ({TRAIN_VIDEOS})")
-    clf.meta.update({"ball": ball_det.name, "pose": pose_est.name, "oracle_ball": args.oracle_ball})
+    clf.meta.update({"ball": ball_det.name, "pose": pose_est.name, "oracle_ball": args.oracle_ball,
+                     "known_racket": args.known_racket})
     clf.save(Path(args.out))
     print(f"saved {args.out}; evaluate on test videos with: python -m scripts.evaluate --videos test")
 
