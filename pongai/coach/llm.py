@@ -98,26 +98,46 @@ def coach_feedback(report: dict, tips: list[dict], keyframes: list[tuple[str, np
     return resp.choices[0].message.content
 
 
-def stroke_prompt(vocab: dict[str, list[str]], side: str) -> str:
-    """Prompt for classify_stroke; also used to build the LoRA fine-tuning set (training/build_vlm_dataset.py)."""
+HAND_WORD = {"R": "right", "L": "left"}
+
+
+def stroke_prompt(vocab: dict[str, list[str]], side: str, racket: str | None = None) -> str:
+    """Prompt for classify_stroke; also used to build the LoRA fine-tuning set (training/build_vlm_dataset.py).
+    racket ("R"/"L") states the player's racket hand; None keeps the original prompt."""
     spec = "\n".join(f"- {k}: one of {v}" for k, v in vocab.items())
+    holds = f" They hold the racket in their {HAND_WORD[racket]} hand." if racket else ""
     return (f"These frames (left to right, ~33 ms apart, last-but-one is ball contact) show the {side}-side "
-            f"table tennis player hitting the ball, with their skeleton drawn. Classify the stroke.\n{spec}\n"
+            f"table tennis player hitting the ball, with their skeleton drawn.{holds} Classify the stroke.\n{spec}\n"
             "Lean = where the player's weight is at contact; feet = which feet are off the ground at contact. "
             'Answer with JSON only, e.g. {"hand": "...", "technique": "...", "lean": "...", "feet": "..."}')
 
 
-def classify_stroke(strip: np.ndarray, vocab: dict[str, list[str]], side: str) -> dict:
-    """Zero-shot stroke labelling of a frame strip (used by scripts/eval_vlm.py)."""
+def racket_prompt(side: str) -> str:
+    return (f"These frames (left to right) show the {side}-side table tennis player hitting the ball, with their "
+            "skeleton drawn. Which of the player's own hands holds the racket? "
+            'Answer with JSON only: {"racket_hand": "left"} or {"racket_hand": "right"}')
+
+
+def _ask_json(text: str, strip: np.ndarray, max_tokens: int) -> dict:
     client = _client()
     if client is None:
         raise RuntimeError("no LLM configured: set OPENAI_API_KEY or PONGAI_LLM_BASE_URL")
-    text = stroke_prompt(vocab, side)
     resp = client.chat.completions.create(
-        model=model_name(), max_tokens=100, temperature=0,
+        model=model_name(), max_tokens=max_tokens, temperature=0,
         response_format={"type": "json_object"},
         messages=[{"role": "user", "content": [{"type": "text", "text": text}, image_part(strip, 1536)]}])
     try:
         return json.loads(resp.choices[0].message.content)
     except (json.JSONDecodeError, TypeError):
         return {}
+
+
+def classify_stroke(strip: np.ndarray, vocab: dict[str, list[str]], side: str, racket: str | None = None) -> dict:
+    """Stroke labelling of a frame strip (used by scripts/eval_vlm.py)."""
+    return _ask_json(stroke_prompt(vocab, side, racket), strip, 100)
+
+
+def classify_racket_hand(strip: np.ndarray, side: str) -> str:
+    """"R" / "L" / "?" for one stroke strip; vote over a player's strokes for a per-player answer."""
+    ans = str(_ask_json(racket_prompt(side), strip, 30).get("racket_hand", "")).lower()
+    return {"right": "R", "left": "L"}.get(ans, "?")

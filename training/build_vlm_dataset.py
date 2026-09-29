@@ -14,6 +14,11 @@ left-handed players; a mirrored right-hander looks like a left-hander on the oth
 table, so the prompt side flips and left/right lean and feet labels swap (hand and technique keep).
 The flipped val strokes are written as a separate "valmirror" split: a left-handed check that
 does not touch the test videos.
+
+--racket states the racket hand in the stroke prompt (every player in the training games is
+right-handed per the dataset README, so "right", or "left" for mirrored copies) and adds one
+"which hand holds the racket?" example per train stroke strip at the contact frame, so the same
+adapter can estimate a player's handedness by voting over their strokes (scripts/eval_vlm.py).
 """
 from __future__ import annotations
 
@@ -22,7 +27,7 @@ import base64
 import json
 from pathlib import Path
 
-from pongai.coach.llm import image_part, stroke_prompt
+from pongai.coach.llm import HAND_WORD, image_part, racket_prompt, stroke_prompt
 from pongai.config import ROOT
 from pongai.data.dataset import FIT_VIDEOS, VAL_VIDEOS, VideoItem, strokes
 from pongai.strokes import TARGETS
@@ -35,7 +40,7 @@ MIRROR_LABEL = {"left_leaning": "right_leaning", "right_leaning": "left_leaning"
 
 
 def export_video(name: str, split: str, out, pose: PoseEstimator, jitters: tuple[int, ...],
-                 mirrors: tuple[bool, ...] = (False,)) -> int:
+                 mirrors: tuple[bool, ...] = (False,), racket: bool = False) -> int:
     img_dir = out / "images" / split
     img_dir.mkdir(parents=True, exist_ok=True)
     rows = []
@@ -45,6 +50,7 @@ def export_video(name: str, split: str, out, pose: PoseEstimator, jitters: tuple
             if m:
                 labels = {t: MIRROR_LABEL.get(v, v) for t, v in labels.items()}
             side = OTHER_SIDE[e.side] if m else e.side
+            hand = ("L" if m else "R") if racket else None  # training games: right-handers only
             for j in jitters:
                 strip = stroke_strip(VideoItem(name).video_path, e.frame + j, e.side, pose, mirror=m)
                 if strip is None:
@@ -52,8 +58,12 @@ def export_video(name: str, split: str, out, pose: PoseEstimator, jitters: tuple
                 url = image_part(strip, 1536)["image_url"]["url"]
                 rel = f"images/{split}/{name}_{e.frame:06d}_{e.side}_{j:+d}{'_m' if m else ''}.jpg"
                 (out / rel).write_bytes(base64.b64decode(url.split(",", 1)[1]))
-                rows.append({"image": rel, "prompt": stroke_prompt(VOCAB, side), "answer": json.dumps(labels),
-                             "video": name, "frame": e.frame, "side": side, "jitter": j, "mirror": m})
+                meta = {"video": name, "frame": e.frame, "side": side, "jitter": j, "mirror": m}
+                rows.append({"image": rel, "prompt": stroke_prompt(VOCAB, side, hand), "answer": json.dumps(labels),
+                             **meta})
+                if hand and split == "train" and j == 0:
+                    rows.append({"image": rel, "prompt": racket_prompt(side),
+                                 "answer": json.dumps({"racket_hand": HAND_WORD[hand]}), "task": "racket", **meta})
     with open(out / f"{split}_{name}.jsonl", "w") as fh:
         fh.writelines(json.dumps(r) + "\n" for r in rows)
     return len(rows)
@@ -64,6 +74,7 @@ def main():
     ap.add_argument("--videos", default=",".join(FIT_VIDEOS + VAL_VIDEOS))
     ap.add_argument("--jitter", type=int, default=2, help="train-only contact-frame shift (0 = off)")
     ap.add_argument("--mirror", action="store_true", help="add flipped train copies and a valmirror split")
+    ap.add_argument("--racket", action="store_true", help="racket hand in the prompt + handedness examples")
     ap.add_argument("--out", default=str(ROOT / "datasets" / "vlm_strokes"))
     args = ap.parse_args()
     out = Path(args.out)
@@ -72,14 +83,15 @@ def main():
         if name not in FIT_VIDEOS + VAL_VIDEOS:
             raise SystemExit(f"{name}: only training videos (game_*) may be used")
         if name in VAL_VIDEOS:
-            print(f"{name} -> val: {export_video(name, 'val', out, pose, (0,))} examples", flush=True)
+            n = export_video(name, "val", out, pose, (0,), racket=args.racket)
+            print(f"{name} -> val: {n} examples", flush=True)
             if args.mirror:
-                n = export_video(name, "valmirror", out, pose, (0,), (True,))
+                n = export_video(name, "valmirror", out, pose, (0,), (True,), racket=args.racket)
                 print(f"{name} -> valmirror: {n} examples", flush=True)
         else:
             jitters = (-args.jitter, 0, args.jitter) if args.jitter else (0,)
             mirrors = (False, True) if args.mirror else (False,)
-            n = export_video(name, "train", out, pose, jitters, mirrors)
+            n = export_video(name, "train", out, pose, jitters, mirrors, racket=args.racket)
             print(f"{name} -> train: {n} examples", flush=True)
 
 
